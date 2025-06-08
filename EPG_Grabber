@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Define the download URLs
+URLS=(
+    "https://epgshare01.online/epgshare01/epg_ripper_UK1.xml.gz"
+    "https://epgshare01.online/epgshare01/epg_ripper_US1.xml.gz"
+    "https://epgshare01.online/epgshare01/epg_ripper_US_LOCALS2.xml.gz"
+    "https://epgshare01.online/epgshare01/epg_ripper_FANDUEL1.xml.gz"
+)
+
+# Destination directory
+DEST_DIR="<path to save files>"
+
+mkdir -p "$DEST_DIR"
+
+for URL in "${URLS[@]}"; do
+    FILE_NAME="$(basename "$URL")"
+    FILE_PATH="/tmp/$FILE_NAME"
+    
+    echo "Downloading $FILE_NAME..."
+    curl -o "$FILE_PATH" "$URL"
+    
+    if [ $? -eq 0 ]; then
+        gunzip -c "$FILE_PATH" > "$DEST_DIR/${FILE_NAME%.gz}"
+        rm "$FILE_PATH"
+    else
+        echo "Failed to download $FILE_NAME"
+    fi
+done
