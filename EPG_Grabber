@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Define the download URLs
 URLS=(
     "https://epgshare01.online/epgshare01/epg_ripper_UK1.xml.gz"
     "https://epgshare01.online/epgshare01/epg_ripper_US1.xml.gz"
@@ -8,7 +7,6 @@ URLS=(
     "https://epgshare01.online/epgshare01/epg_ripper_FANDUEL1.xml.gz"
 )
 
-# Destination directory
 DEST_DIR="<path to save files>"
 
 mkdir -p "$DEST_DIR"
